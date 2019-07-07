@@ -38,7 +38,7 @@ foreach ($client->parseEvents() as $event) {
                             [
                                 'type' => 'text',
                                 //'text' => $message['text']
-                                'text' => "$maxTmp"
+                                'text' => var_dump($fourcast)
                             ]
                         ]
                     ]);
