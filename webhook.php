@@ -29,16 +29,17 @@ foreach ($client->parseEvents() as $event) {
             switch ($message['type']) {
                 case 'text':
                     $fourcast = getWeather();
-                    $weatherImg = $fourcast['forecasts'][0]['image']['url'];
-                    $maxTmp = $fourcast['forecasts'][0]['temperture']['max']["celsius"];
-                    $minTmp = $fourcast['forecasts'][0]['temperture']['min']["celsius"];
+                    $date = $fourcast['forecasts'][0]["date"];
+                    $telop = $fourcast['forecasts'][0]["telop"];
+                    $max = $fourcast['forecasts'][0]["temperature"]["max"]["celsius"];
+                    $min = $fourcast['forecasts'][0]["temperature"]["min"]["celsius"];
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
                             [
                                 'type' => 'text',
                                 //'text' => $message['text']
-                                'text' => var_dump($fourcast)
+                                'text' => $date
                             ]
                         ]
                     ]);
