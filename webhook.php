@@ -17,7 +17,7 @@
  */
 
 require_once('./LINEBotTiny.php');
-
+require_once('./weatherHacks.php');
 $channelAccessToken = 'JIQtnC9LfeWRyRrtZbxAnYFqr6Px5iri1aBgxsroj5Q9l5UKHlaq5wkE4I6AWLW20ohg6as1DNI5R2MqifUKJ/GaA+qVqXXJK5ckGu73rUV0p9QvL6Qa54L7e8ALC+3Iue06VXO1eUHpEFX7z8tR/AdB04t89/1O/w1cDnyilFU=';
 $channelSecret = '256da576e92f872af619cda5f60a5019';
 
@@ -28,13 +28,17 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
+                    $fourcast = getWeather();
+                    $weatherImg = $fourcast['forecasts'][0]['image']['url'];
+                    $maxTmp = $fourcast['forecasts'][0]['temperture']['max']["celsius"];
+                    $minTmp = $fourcast['forecasts'][0]['temperture']['min']["celsius"];
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
                             [
                                 'type' => 'text',
                                 //'text' => $message['text']
-                                'text' => 'めめさいこー'
+                                'text' => "$maxTmp"
                             ]
                         ]
                     ]);
