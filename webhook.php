@@ -35,7 +35,7 @@ foreach ($client->parseEvents() as $event) {
                     $max = $fourcast['forecasts'][0]["temperature"]["max"]["celsius"];
                     $min = $fourcast['forecasts'][0]["temperature"]["min"]["celsius"];
 
-                    $text = $date." のさいたまの天気"."\n".$telop."\n"."最高気温：".$max."\n"."最低気温：".$min;
+                    $text = $date." 埼玉の天気"."\n予報： ".$telop."\n"."最高気温：".$max."\n"."最低気温：".$min;
 
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
