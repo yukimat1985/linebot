@@ -18,6 +18,8 @@
 
 require_once('./LINEBotTiny.php');
 require_once('./weatherHacks.php');
+require_once('./phpQuery-onefile.php');
+
 $channelAccessToken = 'JIQtnC9LfeWRyRrtZbxAnYFqr6Px5iri1aBgxsroj5Q9l5UKHlaq5wkE4I6AWLW20ohg6as1DNI5R2MqifUKJ/GaA+qVqXXJK5ckGu73rUV0p9QvL6Qa54L7e8ALC+3Iue06VXO1eUHpEFX7z8tR/AdB04t89/1O/w1cDnyilFU=';
 $channelSecret = '256da576e92f872af619cda5f60a5019';
 
@@ -29,13 +31,20 @@ foreach ($client->parseEvents() as $event) {
             switch ($message['type']) {
                 case 'text':
                     //天気情報取得
-                    $fourcast = getWeather();
-                    $date = $fourcast['forecasts'][0]["date"];
-                    $telop = $fourcast['forecasts'][0]["telop"];
-                    $max = $fourcast['forecasts'][0]["temperature"]["max"]["celsius"];
-                    $min = $fourcast['forecasts'][0]["temperature"]["min"]["celsius"];
+                    $fourcast = getWeather_jma();
+                    $date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
+                    $img = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img");
+                    //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.area:eq(0)")->text();
+                    //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.area:eq(0)")->find("img");
+                    //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(0)")->text();
+                    //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(0)")->text();
+                    //$date = $fourcast['forecasts'][0]["date"];
+                    //$telop = $fourcast['forecasts'][0]["telop"];
+                    //$max = $fourcast['forecasts'][0]["temperature"]["max"]["celsius"];
+                    //$min = $fourcast['forecasts'][0]["temperature"]["min"]["celsius"];
 
-                    $text = $date." 埼玉の天気"."\n予報： ".$telop."\n"."最高気温：".$max."\n"."最低気温：".$min;
+                    //$text = $date." 埼玉の天気"."\n予報： ".$text."\n"."最高気温：".$max."\n"."最低気温：".$min;
+                    $text = $date." 埼玉の天気"."\n予報： ".$img;
 
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],

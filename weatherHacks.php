@@ -1,5 +1,5 @@
 <?php
-    function getWeather(){
+    function getWeather_forecast(){
       //API については http://weather.livedoor.com/weather_hacks/webservice
       $url = "http://weather.livedoor.com/forecast/webservice/json/v1?city=110010";
       //$json = file_get_contents($url, true);//セキュリティが厳しいと、使用できない
@@ -11,6 +11,14 @@
       curl_close($conn);
       $json = json_decode($result, true);
       return $json;
+    }
+    function getWeather_jma(){
+      $url = "https://www.jma.go.jp/jp/yoho/319.html";
+      $data = array();
+      $conn = curl_init();
+      curl_setopt($conn, CURLOPT_URL, $url);//　取得するURLを指定
+      curl_setopt($conn, CURLOPT_RETURNTRANSFER, true);// 実行結果を文字列で返す
+      return curl_exec($conn);
     }
     /* 以降、データの取得例
     // Pubric
