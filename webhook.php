@@ -52,9 +52,7 @@ foreach ($client->parseEvents() as $event) {
                             [
                                 'type' => 'text',
                                 'text' => $text
-                            ]
                             ],
-                        'messages' => [
                             [
                                 //'type' => 'image',
                                 //'originalContentUrl' => $img,
