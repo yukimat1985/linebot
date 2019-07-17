@@ -31,9 +31,9 @@ foreach ($client->parseEvents() as $event) {
             switch ($message['type']) {
                 case 'text':
                     //天気情報取得
-                    $fourcast = getWeather_jma();
-                    $date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
-                    $img = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img");
+                    //$fourcast = getWeather_jma();
+                    //$date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
+                    //$img = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img");
                     //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.area:eq(0)")->text();
                     //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.area:eq(0)")->find("img");
                     //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(0)")->text();
@@ -44,8 +44,8 @@ foreach ($client->parseEvents() as $event) {
                     //$min = $fourcast['forecasts'][0]["temperature"]["min"]["celsius"];
 
                     //$text = $date." 埼玉の天気"."\n予報： ".$text."\n"."最高気温：".$max."\n"."最低気温：".$min;
-                    $text = $date." 埼玉の天気"."\n予報： ".$img;
-
+                    //$text = $date." 埼玉の天気"."\n予報： ".$img;
+                    $text = "meme";
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
