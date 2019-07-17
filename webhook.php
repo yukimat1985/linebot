@@ -56,9 +56,11 @@ foreach ($client->parseEvents() as $event) {
                             ],
                         'messages' => [
                             [
-                                'type' => 'image',
-                                'originalContentUrl' => $img,
-                                'previewImageUrl' => $img
+                                //'type' => 'image',
+                                //'originalContentUrl' => $img,
+                                //'previewImageUrl' => $img
+                                'type' => 'text',
+                                'text' => $text
                             ]
                         ]
                     ]);
