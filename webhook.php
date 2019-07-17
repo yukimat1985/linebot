@@ -44,14 +44,15 @@ foreach ($client->parseEvents() as $event) {
                     //$min = $fourcast['forecasts'][0]["temperature"]["min"]["celsius"];
 
                     //$text = $date." 埼玉の天気"."\n予報： ".$text."\n"."最高気温：".$max."\n"."最低気温：".$min;
-                    $text = $date." 埼玉の天気"."\n予報： ".$img;
+                    $text = $date." 埼玉の天気"."\n予報： ";
                     
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
                             [
                                 'type' => 'text',
-                                'text' => $text
+                                'text' => $text,
+                                'image' => $img
                             ]
                         ]
                     ]);
