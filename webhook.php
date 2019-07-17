@@ -45,7 +45,7 @@ foreach ($client->parseEvents() as $event) {
 
                     //$text = $date." 埼玉の天気"."\n予報： ".$text."\n"."最高気温：".$max."\n"."最低気温：".$min;
                     $text = $date." 埼玉の天気"."\n予報： ".$img;
-                    $text = "meme";
+                    
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
