@@ -83,30 +83,18 @@ foreach ($client->parseEvents() as $event) {
                                 'type' => 'text',
                                 'text' => $day_after_tomorrow_text
                             ]
-                            );
+                        );
                     }else{
                         //$today_text = 'それはアカーーーン';
                         $messages = array(
+                            [
                             'type' => 'text',
                             'text' => 'それはアカーーーン'
+                            ]
                         );
                     }
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
-                        /*'messages' => [
-                            [
-                                'type' => 'text',
-                                'text' => $today_text
-                            ],
-                            [
-                                'type' => 'text',
-                                'text' => $tomorrow_text
-                            ],
-                            [
-                                'type' => 'text',
-                                'text' => $day_after_tomorrow_text
-                            ]
-                        ]*/
                         'messages' => $messages
                     ]);
                     break;
