@@ -54,10 +54,10 @@ foreach ($client->parseEvents() as $event) {
                                 'type' => 'text',
                                 'text' => $text
                             ],
-                            /*[
+                            [
                                 'type' => 'text',
                                 'text' => $result
-                            ]*/
+                            ]
                         ]
                     ]);
                     break;
@@ -73,7 +73,7 @@ foreach ($client->parseEvents() as $event) {
 };
 
 function createNewRichmenu(){
-    $sh = <<< EOF
+    $text = <<< EOF
     curl -v -X POST https://api.line.me/v2/bot/richmenu \
     -H 'Authorization: Bearer $channelAccessToken' \
     -H 'Content-Type:application/json' \
@@ -162,4 +162,5 @@ function createNewRichmenu(){
       ]
     }'
 EOF;
+return $text;
 }
