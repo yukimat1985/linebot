@@ -54,10 +54,10 @@ foreach ($client->parseEvents() as $event) {
                                 'type' => 'text',
                                 'text' => $text
                             ],
-                            [
+                            /*[
                                 'type' => 'text',
                                 'text' => $result
-                            ]
+                            ]*/
                         ]
                     ]);
                     break;
