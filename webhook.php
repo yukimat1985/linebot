@@ -30,33 +30,65 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    //天気情報取得
-                    $fourcast = getWeather_jma();
-                    $date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
-                    $img = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img");
-                    //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.area:eq(0)")->text();
-                    //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.area:eq(0)")->find("img");
-                    //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(0)")->text();
-                    //echo phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(0)")->text();
-                    //$date = $fourcast['forecasts'][0]["date"];
-                    //$telop = $fourcast['forecasts'][0]["telop"];
-                    //$max = $fourcast['forecasts'][0]["temperature"]["max"]["celsius"];
-                    //$min = $fourcast['forecasts'][0]["temperature"]["min"]["celsius"];
+                    $fourcast = '';
+                    switch($message['text']){    
+                        case '札幌':
+                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/306.html');
+                            break;
+                        case '東京':
+                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/319.html');
+                            break;
+                        case '大阪':
+                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/331.html');
+                            break;
+                        case '名古屋':
+                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/329.html');
+                            break;
+                        case '福岡':
+                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/346.html');
+                            break;
+                        case '沖縄':
+                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/353.html');
+                            break;
+                    }
+                    if(isset($fourcast)){
+                        $today_date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
+                        $today_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img")->attr("title");
+                        $today_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(0)")->text();
+                        $today_temp = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(0)")->text();
+                        $today_text = $date." 埼玉の天気"."\n予報： ".$today_img."\n降水確率: ".$today_rain."\n気温: ".$today_temp;
+                        
+                        $tomorrow;
+                        $tomorrow_date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(1)")->text();
+                        $tomorrow_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(1)")->find("img")->attr("title");
+                        $tomorrow_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(1)")->text();
+                        $tomorrow_temp = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(1)")->text();
+                        $tomorrow_text = $tomorrow_date." 埼玉の天気"."\n予報： ".$tomorrow_img."\n降水確率: ".$tomorrow_rain."\n気温: ".$tomorrow_temp;
 
-                    //$text = $date." 埼玉の天気"."\n予報： ".$text."\n"."最高気温：".$max."\n"."最低気温：".$min;
-                    $text = $date." 埼玉の天気"."\n予報： ";
-                    //
+                        $day_after_tomorrow;
+                        $day_after_tomorrow_date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(2)")->text();
+                        $day_after_tomorrow_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(2)")->find("img")->attr("title");
+                        $day_after_tomorrow_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(2)")->text();
+                        $day_after_tomorrow_temp = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(2)")->text();
+                        $day_after_tomorrow_text = $day_after_tomorrow_date." 埼玉の天気"."\n予報： ".$day_after_tomorrow_img."\n降水確率: ".$day_after_tomorrow_rain."\n気温: ".$day_after_tomorrow_temp;
+                    }else{
+                        $today_text = 'それはアカーーーン';
+                    }
                     $result = createNewRichmenu();
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
                             [
                                 'type' => 'text',
-                                'text' => $text
+                                'text' => $today_text
                             ],
                             [
                                 'type' => 'text',
-                                'text' => $result
+                                'text' => $tomorrow_text
+                            ],
+                            [
+                                'type' => 'text',
+                                'text' => $day_after_tomorrow_text
                             ]
                         ]
                     ]);
@@ -72,95 +104,3 @@ foreach ($client->parseEvents() as $event) {
     }
 };
 
-function createNewRichmenu(){
-    $text = <<< EOF
-    curl -v -X POST https://api.line.me/v2/bot/richmenu \
-    -H 'Authorization: Bearer $channelAccessToken' \
-    -H 'Content-Type:application/json' \
-    -d \
-    '{
-      "size":{
-          "width":2500,
-          "height":1686
-      },
-      "selected":false,
-      "name":"Controller",
-      "chatBarText":"Controller",
-      "areas":[
-          {
-            "bounds":{
-                "x":551,
-                "y":325,
-                "width":321,
-                "height":321
-            },
-            "action":{
-                "type":"message",
-                "text":"up"
-            }
-          },
-          {
-            "bounds":{
-                "x":876,
-                "y":651,
-                "width":321,
-                "height":321
-            },
-            "action":{
-                "type":"message",
-                "text":"right"
-            }
-          },
-          {
-            "bounds":{
-                "x":551,
-                "y":972,
-                "width":321,
-                "height":321
-            },
-            "action":{
-                "type":"message",
-                "text":"down"
-            }
-          },
-          {
-            "bounds":{
-                "x":225,
-                "y":651,
-                "width":321,
-                "height":321
-            },
-            "action":{
-                "type":"message",
-                "text":"left"
-            }
-          },
-          {
-            "bounds":{
-                "x":1433,
-                "y":657,
-                "width":367,
-                "height":367
-            },
-            "action":{
-                "type":"message",
-                "text":"btn b"
-            }
-          },
-          {
-            "bounds":{
-                "x":1907,
-                "y":657,
-                "width":367,
-                "height":367
-            },
-            "action":{
-                "type":"message",
-                "text":"btn a"
-            }
-          }
-      ]
-    }'
-EOF;
-return json_decode(shell_exec(str_replace('\\', '', str_replace(PHP_EOL, '', $sh))), true);;
-}
