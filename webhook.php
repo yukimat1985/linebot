@@ -35,27 +35,27 @@ foreach ($client->parseEvents() as $event) {
                         case '札幌':
                             //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/306.html');
                             $fourcast = $message['text'];
-                            break;
+                            //break;
                         case '東京':
                             //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/319.html');
                             $fourcast = $message['text'];
-                            break;
+                            //break;
                         case '大阪':
                             //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/331.html');
                             $fourcast = $message['text'];
-                            break;
+                            //break;
                         case '名古屋':
                             //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/329.html');
                             $fourcast = $message['text'];
-                            break;
+                            //break;
                         case '福岡':
                             //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/346.html');
                             $fourcast = $message['text'];
-                            break;
+                            //break;
                         case '沖縄':
                             //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/353.html');
                             $fourcast = $message['text'];
-                            break;
+                            //break;
                     }
                     /*
                     if(isset($fourcast)){
