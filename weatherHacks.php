@@ -13,7 +13,7 @@
       return $json;
     }
     function getWeather_jma($url){
-      $url = "https://www.jma.go.jp/jp/yoho/319.html";
+      //$url = "https://www.jma.go.jp/jp/yoho/319.html";
       $data = array();
       $conn = curl_init();
       curl_setopt($conn, CURLOPT_URL, $url);//　取得するURLを指定

@@ -30,7 +30,7 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    $fourcast = '';
+                    $fourcast = "";
                     switch($message['text']){
                         case '札幌':
                             $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/306.html');
@@ -51,7 +51,7 @@ foreach ($client->parseEvents() as $event) {
                             $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/353.html');
                             break;
                     }
-                    if(isset($fourcast)){
+                    if($fourcast !== ""){
                         $today_date = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
                         $today_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img")->attr("title");
                         $today_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(0)")->text();
@@ -77,7 +77,7 @@ foreach ($client->parseEvents() as $event) {
                         'messages' => [
                             [
                                 'type' => 'text',
-                                'text' => $message['text']
+                                'text' => $today_text
                             ],
                             [
                                 'type' => 'text',
