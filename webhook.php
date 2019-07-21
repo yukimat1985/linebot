@@ -59,7 +59,8 @@ foreach ($client->parseEvents() as $event) {
                         $today_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img")->attr("title");
                         $today_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(0)")->text();
                         $today_temp = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(0)")->text();
-                        $today_text = $date." の天気"."\n予報： ".$today_img."\n降水確率: ".$today_rain."\n気温: ".$today_temp;
+                        //$today_text = $today_date." の天気"."\n予報： ".$today_img."\n降水確率: ".$today_rain."\n気温: ".$today_temp;
+                        $today_text = $today_img;
 
                         $tomorrow_date = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(1)")->text();
                         $tomorrow_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(1)")->find("img")->attr("title");
