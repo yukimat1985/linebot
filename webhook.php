@@ -53,7 +53,8 @@ foreach ($client->parseEvents() as $event) {
                             break;
                     }*/
                     //if($fourcast !== ""){
-                        $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/319.html');
+                        //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/319.html');
+                        $fourcast = getWeather_jma();
                         $today_date = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
                         $today_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img")->attr("title");
                         $today_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(0)")->text();
