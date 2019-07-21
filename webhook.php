@@ -81,7 +81,6 @@ foreach ($client->parseEvents() as $event) {
                     }else{
                         $today_text = 'それはアカーーーン';
                     }*/
-                    $result = createNewRichmenu();
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
