@@ -30,7 +30,8 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    $fourcast = "ss";/*
+                    //$fourcast = "ss";
+                    /*
                     switch($message['text']){
                         case '札幌':
                             $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/306.html');
@@ -51,7 +52,7 @@ foreach ($client->parseEvents() as $event) {
                             $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/353.html');
                             break;
                     }*/
-                    if($fourcast !== ""){
+                    //if($fourcast !== ""){
                         $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/319.html');
                         $today_date = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
                         $today_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img")->attr("title");
@@ -70,9 +71,9 @@ foreach ($client->parseEvents() as $event) {
                         $day_after_tomorrow_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(2)")->text();
                         $day_after_tomorrow_temp = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(2)")->text();
                         $day_after_tomorrow_text = $day_after_tomorrow_date." の天気"."\n予報： ".$day_after_tomorrow_img."\n降水確率: ".$day_after_tomorrow_rain."\n気温: ".$day_after_tomorrow_temp;
-                    }else{
-                        $today_text = 'それはアカーーーン';
-                    }
+                    //}else{
+                    //    $today_text = 'それはアカーーーン';
+                    //}
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
