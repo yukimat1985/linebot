@@ -45,7 +45,8 @@ foreach ($client->parseEvents() as $event) {
 
                     //$text = $date." 埼玉の天気"."\n予報： ".$text."\n"."最高気温：".$max."\n"."最低気温：".$min;
                     $text = $date." 埼玉の天気"."\n予報： ";
-                    
+                    //
+                    $result = createNewRichmenu();
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
@@ -54,9 +55,8 @@ foreach ($client->parseEvents() as $event) {
                                 'text' => $text
                             ],
                             [
-                                'type' => 'image',
-                                'originalContentUrl' => $img,
-                                'previewImageUrl' => $img
+                                'type' => 'text',
+                                'text' => $result
                             ]
                         ]
                     ]);
@@ -71,3 +71,95 @@ foreach ($client->parseEvents() as $event) {
             break;
     }
 };
+
+function createNewRichmenu(){
+    $sh = <<< EOF
+    curl -v -X POST https://api.line.me/v2/bot/richmenu \
+    -H 'Authorization: Bearer $channelAccessToken' \
+    -H 'Content-Type:application/json' \
+    -d \
+    '{
+      "size":{
+          "width":2500,
+          "height":1686
+      },
+      "selected":false,
+      "name":"Controller",
+      "chatBarText":"Controller",
+      "areas":[
+          {
+            "bounds":{
+                "x":551,
+                "y":325,
+                "width":321,
+                "height":321
+            },
+            "action":{
+                "type":"message",
+                "text":"up"
+            }
+          },
+          {
+            "bounds":{
+                "x":876,
+                "y":651,
+                "width":321,
+                "height":321
+            },
+            "action":{
+                "type":"message",
+                "text":"right"
+            }
+          },
+          {
+            "bounds":{
+                "x":551,
+                "y":972,
+                "width":321,
+                "height":321
+            },
+            "action":{
+                "type":"message",
+                "text":"down"
+            }
+          },
+          {
+            "bounds":{
+                "x":225,
+                "y":651,
+                "width":321,
+                "height":321
+            },
+            "action":{
+                "type":"message",
+                "text":"left"
+            }
+          },
+          {
+            "bounds":{
+                "x":1433,
+                "y":657,
+                "width":367,
+                "height":367
+            },
+            "action":{
+                "type":"message",
+                "text":"btn b"
+            }
+          },
+          {
+            "bounds":{
+                "x":1907,
+                "y":657,
+                "width":367,
+                "height":367
+            },
+            "action":{
+                "type":"message",
+                "text":"btn a"
+            }
+          }
+      ]
+    }'
+EOF;
+}
