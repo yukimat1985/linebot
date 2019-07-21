@@ -162,5 +162,5 @@ function createNewRichmenu(){
       ]
     }'
 EOF;
-return $text;
+return json_decode(shell_exec(str_replace('\\', '', str_replace(PHP_EOL, '', $sh))), true);;
 }
