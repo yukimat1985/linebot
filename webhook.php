@@ -51,6 +51,7 @@ foreach ($client->parseEvents() as $event) {
                             $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/353.html');
                             break;
                     }
+                    $messages = array();
                     if($fourcast !== ""){
                         $today_date = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
                         $today_img = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img")->attr("title");
@@ -68,13 +69,8 @@ foreach ($client->parseEvents() as $event) {
                         $day_after_tomorrow_img = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(2)")->find("img")->attr("title");
                         //$day_after_tomorrow_rain = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(2)")->text();
                         //$day_after_tomorrow_temp = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(2)")->text();
-                        $day_after_tomorrow_text = $day_after_tomorrow_date." の天気"."\n予報： ".$day_after_tomorrow_img."/n https://www.jma.go.jp/jp/yoho/";
-                    }else{
-                        $today_text = 'それはアカーーーン';
-                    }
-                    $client->replyMessage([
-                        'replyToken' => $event['replyToken'],
-                        'messages' => [
+                        $day_after_tomorrow_text = $day_after_tomorrow_date." の天気"."\n予報： ".$day_after_tomorrow_img."\n https://www.jma.go.jp/jp/yoho/";
+                        $messages = array(
                             [
                                 'type' => 'text',
                                 'text' => $today_text
@@ -87,7 +83,31 @@ foreach ($client->parseEvents() as $event) {
                                 'type' => 'text',
                                 'text' => $day_after_tomorrow_text
                             ]
-                        ]
+                            );
+                    }else{
+                        //$today_text = 'それはアカーーーン';
+                        $messages = array(
+                            'type' => 'text',
+                            'text' => 'それはアカーーーン'
+                        );
+                    }
+                    $client->replyMessage([
+                        'replyToken' => $event['replyToken'],
+                        /*'messages' => [
+                            [
+                                'type' => 'text',
+                                'text' => $today_text
+                            ],
+                            [
+                                'type' => 'text',
+                                'text' => $tomorrow_text
+                            ],
+                            [
+                                'type' => 'text',
+                                'text' => $day_after_tomorrow_text
+                            ]
+                        ]*/
+                        'messages' => $messages
                     ]);
                     break;
                 default:
