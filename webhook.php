@@ -52,25 +52,23 @@ foreach ($client->parseEvents() as $event) {
                             break;
                     }
                     if(isset($fourcast)){
-                        $today_date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
+                        $today_date = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
                         $today_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img")->attr("title");
                         $today_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(0)")->text();
                         $today_temp = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(0)")->text();
-                        $today_text = $date." 埼玉の天気"."\n予報： ".$today_img."\n降水確率: ".$today_rain."\n気温: ".$today_temp;
-                        
-                        $tomorrow;
-                        $tomorrow_date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(1)")->text();
+                        $today_text = $date." の天気"."\n予報： ".$today_img."\n降水確率: ".$today_rain."\n気温: ".$today_temp;
+
+                        $tomorrow_date = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(1)")->text();
                         $tomorrow_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(1)")->find("img")->attr("title");
                         $tomorrow_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(1)")->text();
                         $tomorrow_temp = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(1)")->text();
-                        $tomorrow_text = $tomorrow_date." 埼玉の天気"."\n予報： ".$tomorrow_img."\n降水確率: ".$tomorrow_rain."\n気温: ".$tomorrow_temp;
+                        $tomorrow_text = $tomorrow_date." の天気"."\n予報： ".$tomorrow_img."\n降水確率: ".$tomorrow_rain."\n気温: ".$tomorrow_temp;
 
-                        $day_after_tomorrow;
-                        $day_after_tomorrow_date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(2)")->text();
+                        $day_after_tomorrow_date = phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(2)")->text();
                         $day_after_tomorrow_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(2)")->find("img")->attr("title");
                         $day_after_tomorrow_rain = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.rain:eq(2)")->text();
                         $day_after_tomorrow_temp = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("td.temp:eq(2)")->text();
-                        $day_after_tomorrow_text = $day_after_tomorrow_date." 埼玉の天気"."\n予報： ".$day_after_tomorrow_img."\n降水確率: ".$day_after_tomorrow_rain."\n気温: ".$day_after_tomorrow_temp;
+                        $day_after_tomorrow_text = $day_after_tomorrow_date." の天気"."\n予報： ".$day_after_tomorrow_img."\n降水確率: ".$day_after_tomorrow_rain."\n気温: ".$day_after_tomorrow_temp;
                     }else{
                         $today_text = 'それはアカーーーン';
                     }
