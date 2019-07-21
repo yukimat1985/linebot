@@ -33,24 +33,31 @@ foreach ($client->parseEvents() as $event) {
                     $fourcast = '';
                     switch($message['text']){    
                         case '札幌':
-                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/306.html');
+                            //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/306.html');
+                            $fourcast = $message['text'];
                             break;
                         case '東京':
-                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/319.html');
+                            //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/319.html');
+                            $fourcast = $message['text'];
                             break;
                         case '大阪':
-                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/331.html');
+                            //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/331.html');
+                            $fourcast = $message['text'];
                             break;
                         case '名古屋':
-                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/329.html');
+                            //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/329.html');
+                            $fourcast = $message['text'];
                             break;
                         case '福岡':
-                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/346.html');
+                            //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/346.html');
+                            $fourcast = $message['text'];
                             break;
                         case '沖縄':
-                            $fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/353.html');
+                            //$fourcast = getWeather_jma('https://www.jma.go.jp/jp/yoho/353.html');
+                            $fourcast = $message['text'];
                             break;
                     }
+                    /*
                     if(isset($fourcast)){
                         $today_date =  phpQuery::newDocument($fourcast)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->text();
                         $today_img = phpQuery::newDocument($html)->find("#base")->find("#main")->find("div")->find("#forecasttablefont")->find("th.weather:eq(0)")->find("img")->attr("title");
@@ -73,7 +80,7 @@ foreach ($client->parseEvents() as $event) {
                         $day_after_tomorrow_text = $day_after_tomorrow_date." 埼玉の天気"."\n予報： ".$day_after_tomorrow_img."\n降水確率: ".$day_after_tomorrow_rain."\n気温: ".$day_after_tomorrow_temp;
                     }else{
                         $today_text = 'それはアカーーーン';
-                    }
+                    }*/
                     $result = createNewRichmenu();
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
@@ -81,7 +88,7 @@ foreach ($client->parseEvents() as $event) {
                             [
                                 'type' => 'text',
                                 'text' => $today_text
-                            ],
+                            ]/*,
                             [
                                 'type' => 'text',
                                 'text' => $tomorrow_text
@@ -89,7 +96,7 @@ foreach ($client->parseEvents() as $event) {
                             [
                                 'type' => 'text',
                                 'text' => $day_after_tomorrow_text
-                            ]
+                            ]*/
                         ]
                     ]);
                     break;
